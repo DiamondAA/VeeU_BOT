@@ -51,9 +51,9 @@ def bot(token):
         print('Points: ' + str(json.loads(medata2)['total_points']))
         print('VIP_level: ' + str(json.loads(medata2)['vip_level']))
         while True:
-            requests.post('https://www.veeuapp.com/v1.0/incentive/tasks?access_token=' + token ,data=json.dumps(video),headers=header)
+            botdata = requests.post('https://www.veeuapp.com/v1.0/incentive/tasks?access_token=' + token ,data=json.dumps(video),headers=header)
             medata3 = requests.get('https://www.veeuapp.com/v1.0/game/power12?access_token=' + token + '&timezone=GMT%2B07%3A00&locale=th_TH',headers=headDATA2).text
-            print(time.strftime('%m/%d/%Y - %H:%M:%S  ') + 'Points: ' + str(json.loads(medata3)['total_points']) + '  VIP_level: ' + str(json.loads(medata2)['vip_level']))
+            print(time.strftime('%m/%d/%Y - %H:%M:%S  ') + 'reward_point: ' + str(json.loads(botdata.text)['task']['reward_point']) + ' ' + 'Points: ' + str(json.loads(medata3)['total_points']) + '  VIP_level: ' + str(json.loads(medata2)['vip_level']))
             for i in range(random.randint(4,10)):
                 time.sleep(random.randint(2,7))
                 requests.post('https://www.veeuapp.com/v1.0/log?auth_token=' + token ,headers=headlog)
